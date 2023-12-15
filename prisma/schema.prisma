@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model BoomerTrigger {
+  BoomerTrigger String
+  GroupID       BigInt  @default(-1)
+  group         Group   @relation(fields: [GroupID], references: [GroupID])
+  Frase         String?
+
+  @@id([BoomerTrigger, GroupID])
+  @@map("BoomerTriggers")
+}
+
+model Group {
+  GroupID        BigInt          @id
+  BoomerCounter  Int             @default(0)
+  CringeCounter  Int             @default(0)
+  GroupName      String?
+  GroupLink      String?
+  RegisterTime   DateTime        @default(now())
+  BoomerTriggers BoomerTrigger[]
+
+  @@map("Groups")
+}
