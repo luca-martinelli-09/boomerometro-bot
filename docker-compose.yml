@@ -16,8 +16,6 @@ services:
     environment:
       MYSQL_DATABASE: ${DB_DATABASE:-app}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-    ports:
-      - 3606:3306
     volumes:
       - ./tmp/mariadb:/var/lib/mysql
   
