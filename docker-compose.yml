@@ -13,6 +13,7 @@ services:
   
   db:
     image: mariadb:latest
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE:-app}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
@@ -21,6 +22,7 @@ services:
   
   adminer:
     image: adminer
+    restart: unless-stopped
     environment:
         ADMINER_DESIGN: mvt
         ADMINER_DEFAULT_SERVER: db
